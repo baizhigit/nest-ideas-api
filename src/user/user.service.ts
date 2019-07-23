@@ -1,7 +1,8 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
+
+import { UserEntity } from './user.entity';
 import { UserDTO, UserRO } from './user.dto';
 
 @Injectable()
@@ -12,10 +13,10 @@ export class UserService {
   ) {}
 
   async showAll(): Promise<UserRO[]> {
-    const users = await this.userRepository.find();
+    const users = await this.userRepository.find({ relations: ['ideas'] });
     return users.map(user => user.toResponseObject(false));
   }
-  
+
   async login(data: UserDTO): Promise<UserRO> {
     const { username, password } = data;
     const user = await this.userRepository.findOne({ where: { username } });
