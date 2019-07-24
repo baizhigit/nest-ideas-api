@@ -24,8 +24,11 @@ export class IdeaController {
   constructor(private ideaService: IdeaService) {}
 
   private logData(options: any) {
+    // tslint:disable-next-line: no-unused-expression
     options.user && this.logger.log('USER' + JSON.stringify(options.user));
+    // tslint:disable-next-line: no-unused-expression
     options.data && this.logger.log('DATA' + JSON.stringify(options.data));
+    // tslint:disable-next-line: no-unused-expression
     options.id && this.logger.log('IDEA' + JSON.stringify(options.id));
   }
 
@@ -64,5 +67,33 @@ export class IdeaController {
   destroyIdea(@Param('id') id: string, @User('id') user: string) {
     this.logData({ id, user });
     return this.ideaService.destroy(id, user);
+  }
+
+  @Post(':id/upvote')
+  @UseGuards(new AuthGuard())
+  upvoteIdea(@Param('id') id: string, @User('id') user: string) {
+    this.logData({ id, user });
+    return this.ideaService.upvote(id, user);
+  }
+
+  @Post(':id/downvote')
+  @UseGuards(new AuthGuard())
+  downvoteIdea(@Param('id') id: string, @User('id') user: string) {
+    this.logData({ id, user });
+    return this.ideaService.downvote(id, user);
+  }
+
+  @Post(':id/bookmark')
+  @UseGuards(new AuthGuard())
+  bookmarkIdea(@Param('id') id: string, @User('id') user: string) {
+    this.logData({ id, user });
+    return this.ideaService.bookmark(id, user);
+  }
+
+  @Delete(':id/bookmark')
+  @UseGuards(new AuthGuard())
+  unbookmarkIdea(@Param('id') id: string, @User('id') user: string) {
+    this.logData({ id, user });
+    return this.ideaService.unbookmark(id, user);
   }
 }

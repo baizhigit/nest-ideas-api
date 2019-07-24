@@ -4,7 +4,7 @@ import { UserRO } from 'src/user/user.dto';
 
 export class IdeaDTO {
   @IsString()
-  title: string;
+  idea: string;
 
   @IsString()
   description: string;
@@ -18,4 +18,6 @@ export class IdeaRO {
   idea: string;
   description: string;
   author: UserRO;
+  upvotes?: number;
+  downvotes?: number;
 }
