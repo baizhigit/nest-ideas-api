@@ -10,8 +10,8 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { UserEntity } from 'src/user/user.entity';
-import { CommentEntity } from 'src/comment/comment.entity';
+import { UserEntity } from '../user/user.entity';
+import { CommentEntity } from '../comment/comment.entity';
 
 @Entity('idea')
 export class IdeaEntity {

@@ -1,10 +1,10 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CommentEntity } from './comment.entity';
 import { Repository } from 'typeorm';
 
-import { IdeaEntity } from 'src/idea/idea.entity';
-import { UserEntity } from 'src/user/user.entity';
+import { CommentEntity } from './comment.entity';
+import { IdeaEntity } from '../idea/idea.entity';
+import { UserEntity } from '../user/user.entity';
 import { CommentDTO } from './comment.dto';
 
 @Injectable()

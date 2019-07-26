@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 
 import { CommentService } from './comment.service';
-import { AuthGuard } from 'src/shared/auth.guard';
-import { ValidationPipe } from 'src/shared/validation.pipe';
-import { User } from 'src/user/user.decorator';
+import { AuthGuard } from '../shared/auth.guard';
+import { ValidationPipe } from '../shared/validation.pipe';
+import { User } from '../user/user.decorator';
 import { CommentDTO } from './comment.dto';
 
 @Controller('api/comments')

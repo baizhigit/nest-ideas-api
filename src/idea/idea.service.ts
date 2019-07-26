@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 
 import { IdeaEntity } from './idea.entity';
 import { IdeaDTO, IdeaRO } from './idea.dto';
-import { UserEntity } from 'src/user/user.entity';
-import { Votes } from 'src/shared/votes.enum';
+import { UserEntity } from '../user/user.entity';
+import { Votes } from '../shared/votes.enum';
 
 @Injectable()
 export class IdeaService {

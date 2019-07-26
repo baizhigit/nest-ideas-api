@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-import { UserRO } from 'src/user/user.dto';
+import { UserRO } from '../user/user.dto';
 
 export class IdeaDTO {
   @IsString()
