@@ -1,6 +1,7 @@
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,7 +12,16 @@ import { UserModule } from './user/user.module';
 import { CommentModule } from './comment/comment.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), IdeaModule, UserModule, CommentModule],
+  imports: [
+    UserModule,
+    IdeaModule,
+    CommentModule,
+    TypeOrmModule.forRoot(),
+    GraphQLModule.forRoot({
+      typePaths: ['./**.*.graphql'],
+      context: ({ req }) => ({ headers: req.headers }),
+    }),
+  ],
   controllers: [AppController],
   providers: [
     AppService,

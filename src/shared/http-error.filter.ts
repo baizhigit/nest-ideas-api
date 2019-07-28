@@ -1,6 +1,6 @@
 import {
-  Catch,
   ExceptionFilter,
+  Catch,
   HttpException,
   ArgumentsHost,
   Logger,
@@ -11,8 +11,8 @@ import {
 export class HttpErrorFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
+    const response = ctx.getResponse();
     const request = ctx.getRequest();
-    const responce = ctx.getResponse();
     const status = exception.getStatus
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
@@ -29,15 +29,19 @@ export class HttpErrorFilter implements ExceptionFilter {
     };
 
     if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      console.error(exception);
+      Logger.error(
+        `${request.method} ${request.url}`,
+        exception.stack,
+        'ExceptionFilter',
+      );
+    } else {
+      Logger.error(
+        `${request.method} ${request.url}`,
+        JSON.stringify(errorResponse),
+        'ExceptionFilter',
+      );
     }
 
-    Logger.error(
-      `${request.method} ${request.url}`,
-      JSON.stringify(errorResponse),
-      'ExceptionFilter',
-    );
-
-    responce.status(status).json(errorResponse);
+    response.status(status).json(errorResponse);
   }
 }
