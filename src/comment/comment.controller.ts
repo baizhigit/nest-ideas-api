@@ -8,6 +8,7 @@ import {
   Body,
   Delete,
   Query,
+  Logger,
 } from '@nestjs/common';
 
 import { CommentService } from './comment.service';
@@ -18,6 +19,7 @@ import { CommentDTO } from './comment.dto';
 
 @Controller('api/comments')
 export class CommentController {
+  logger = new Logger('CommentController');
   constructor(private commentService: CommentService) {}
 
   @Get('idea/:id')

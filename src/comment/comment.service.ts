@@ -19,17 +19,16 @@ export class CommentService {
   ) {}
 
   private toResponseObject(comment: CommentEntity) {
-    const responseObj: any = comment;
-    if (comment.author) {
-      responseObj.author = comment.author.toResponseObject();
-    }
-    return responseObj;
+    return {
+      ...comment,
+      author: comment.author && comment.author.toResponseObject(),
+    };
   }
 
-  async showByIdea(id: string, page: number = 1) {
+  async showByIdea(ideaId: string, page: number = 1) {
     const comments = await this.commentRepository.find({
-      where: { idea: { id } },
-      relations: ['author'],
+      where: { idea: { id: ideaId } },
+      relations: ['author', 'idea'],
       take: 25,
       skip: 25 * (page - 1),
     });
@@ -37,10 +36,10 @@ export class CommentService {
     return comments.map(comment => this.toResponseObject(comment));
   }
 
-  async showByUser(id: string, page: number = 1) {
+  async showByUser(userId: string, page: number = 1) {
     const comments = await this.commentRepository.find({
-      where: { author: { id } },
-      relations: ['author'],
+      where: { author: { id: userId } },
+      relations: ['author', 'idea'],
       take: 25,
       skip: 25 * (page - 1),
     });

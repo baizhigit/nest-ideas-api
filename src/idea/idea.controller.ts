@@ -28,7 +28,7 @@ export class IdeaController {
     // tslint:disable-next-line: no-unused-expression
     options.user && this.logger.log('USER' + JSON.stringify(options.user));
     // tslint:disable-next-line: no-unused-expression
-    options.data && this.logger.log('DATA' + JSON.stringify(options.data));
+    options.body && this.logger.log('BODY ' + JSON.stringify(options.body));
     // tslint:disable-next-line: no-unused-expression
     options.id && this.logger.log('IDEA' + JSON.stringify(options.id));
   }
@@ -38,7 +38,7 @@ export class IdeaController {
     return this.ideaService.showAll(page);
   }
 
-  @Get('/new')
+  @Get('/newest')
   showNewIdeas(@Query('page') page: number) {
     return this.ideaService.showAll(page, true);
   }
@@ -46,13 +46,14 @@ export class IdeaController {
   @Post()
   @UseGuards(new AuthGuard())
   @UsePipes(new ValidationPipe())
-  createIdea(@User('id') user, @Body() data: IdeaDTO) {
-    this.logData({ user, data });
-    return this.ideaService.create(user, data);
+  createIdea(@User('id') user, @Body() body: IdeaDTO) {
+    this.logData({ user, body });
+    return this.ideaService.create(user, body);
   }
 
   @Get(':id')
   readIdea(@Param('id') id: string) {
+    this.logData({ id });
     return this.ideaService.read(id);
   }
 
@@ -62,10 +63,10 @@ export class IdeaController {
   updateIdea(
     @Param('id') id: string,
     @User('id') user: string,
-    @Body() data: Partial<IdeaDTO>,
+    @Body() body: Partial<IdeaDTO>,
   ) {
-    this.logData({ id, user, data });
-    return this.ideaService.update(id, user, data);
+    this.logData({ id, user, body });
+    return this.ideaService.update(id, user, body);
   }
 
   @Delete(':id')

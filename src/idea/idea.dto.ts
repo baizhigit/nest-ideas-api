@@ -4,10 +4,10 @@ import { UserRO } from '../user/user.dto';
 
 export class IdeaDTO {
   @IsString()
-  idea: string;
+  readonly idea: string;
 
   @IsString()
-  description: string;
+  readonly description: string;
 }
 
 // tslint:disable-next-line: max-classes-per-file

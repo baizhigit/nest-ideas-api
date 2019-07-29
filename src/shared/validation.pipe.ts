@@ -32,18 +32,15 @@ export class ValidationPipe implements PipeTransform<any> {
     return value;
   }
 
-  // tslint:disable-next-line: ban-types
-  private toValidate(metatype: Function): boolean {
-    // tslint:disable-next-line: ban-types
-    const types: Function[] = [String, Boolean, Number, Array, Object];
-    return !types.includes(metatype);
+  private toValidate(metatype): boolean {
+    const types = [String, Boolean, Number, Array, Object];
+    return !types.find(type => metatype === type);
   }
 
   private formatErrors(errors: any[]) {
     return errors
       .map(err => {
-        // tslint:disable-next-line: prefer-const
-        for (let property in err.constraints) {
+        for (const property in err.constraints) {
           if (property) {
             return err.constraints[property];
           }
