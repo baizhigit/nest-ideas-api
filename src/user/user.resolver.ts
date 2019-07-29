@@ -33,32 +33,32 @@ export class UserResolver {
 
   @Query()
   @UseGuards(new AuthGuard())
-  whoami(@Context('user') user) {
+  async whoami(@Context('user') user) {
     const { username } = user;
-    return this.userService.read(username);
+    return await this.userService.read(username);
   }
 
   @Mutation()
-  login(
+  async login(
     @Args('username') username: string,
     @Args('password') password: string,
   ) {
     const user: UserDTO = { username, password };
-    return this.userService.login(user);
+    return await this.userService.login(user);
   }
 
   @Mutation()
-  register(
+  async register(
     @Args('username') username: string,
     @Args('password') password: string,
   ) {
     const user: UserDTO = { username, password };
-    return this.userService.register(user);
+    return await this.userService.register(user);
   }
 
   @ResolveProperty()
-  comments(@Parent() user) {
+  async comments(@Parent() user) {
     const { id } = user;
-    this.commentService.showByUser(id);
+    await this.commentService.showByUser(id);
   }
 }

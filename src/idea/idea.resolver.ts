@@ -22,8 +22,8 @@ export class IdeaResolver {
   }
 
   @ResolveProperty()
-  comments(@Parent() idea) {
+  async comments(@Parent() idea) {
     const { id } = idea;
-    this.commentService.showByIdea(id);
+    await this.commentService.showByIdea(id);
   }
 }
