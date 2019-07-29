@@ -57,8 +57,8 @@ export class UserResolver {
   }
 
   @ResolveProperty()
-  async comments(@Parent() user) {
+  comments(@Parent() user) {
     const { id } = user;
-    await this.commentService.showByUser(id);
+    this.commentService.showByUser(id);
   }
 }

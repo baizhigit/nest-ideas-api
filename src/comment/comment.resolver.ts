@@ -3,7 +3,6 @@ import { CommentService } from './comment.service';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/shared/auth.guard';
 import { CommentDTO } from './comment.dto';
-import { async } from 'rxjs/internal/scheduler/async';
 
 @Resolver('comment')
 export class CommentResolver {

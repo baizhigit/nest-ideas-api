@@ -1,5 +1,5 @@
 type User {
-  id: ID!
+  id: ID
   username: String!
   created: String!
   bookmarks: [Idea!]
