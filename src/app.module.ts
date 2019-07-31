@@ -10,7 +10,7 @@ import { AppGateway } from './app.gateway';
   imports: [
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
-      typePaths: ['./**.*.graphql'],
+      typePaths: ['./**/*.graphql'],
       context: ({ req }) => ({ headers: req.headers }),
     }),
     ApiModule,

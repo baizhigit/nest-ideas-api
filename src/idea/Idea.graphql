@@ -1,26 +1,26 @@
 type Idea {
-  id: ID;
-  created: String!;
-  updated: String!;
-  idea: String!;
-  description: String!;
-  author: User;
-  upvotes: Int;
-  downvotes: Int;
+  id: ID
+  created: String!
+  updated: String!
+  idea: String!
+  description: String!
+  author: User
+  upvotes: Int
+  downvotes: Int
   comments: [Comment!]
 }
 
-type Query{
+type Query {
   ideas(page: Int, newest: Boolean): [Idea!]
   idea(id: ID!): Idea!
 }
 
-type Mutation{
+type Mutation {
   createIdea(idea: String!, description: String!): Idea!
   updateIdea(id: ID!, idea: String, description: String): Idea!
   deleteIdea(id: ID!): Idea!
   upvote(id: ID!): Idea!
   downvote(id: ID!): Idea!
-  boomark(id: ID!): User!
+  bookmark(id: ID!): User!
   unbookmark(id: ID!): User!
 }
